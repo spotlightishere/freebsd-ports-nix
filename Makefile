@@ -2,10 +2,8 @@
 # $FreeBSD: head/sysutils/nix/Makefile 550026 2020-09-25 12:54:38Z 0mp $
 
 PORTNAME=	nix
-DISTVERSION=	2.3.7.9999
+DISTVERSION=	2.16.1
 CATEGORIES=	sysutils
-PATCH_SITES=	https://github.com/0mp/nix/commit/
-PATCHFILES=	56dc854fa1158b5920cfeefa690e087cf13db915.patch:-p1
 
 MAINTAINER=	0mp@FreeBSD.org
 COMMENT=	Purely functional package manager
@@ -16,29 +14,34 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 BUILD_DEPENDS=	${LOCALBASE}/share/aclocal/ax_cxx_compile_stdcxx.m4:devel/autoconf-archive \
 		bash:shells/bash \
 		mdbook:textproc/mdbook \
+		mdbook-linkcheck:textproc/mdbook-linkcheck \
 		gnustat:sysutils/coreutils \
 		grealpath:sysutils/coreutils \
 		jq:textproc/jq \
 		libarchive>=3.1.2:archivers/libarchive \
 		googletest>0:devel/googletest \
+		${LOCALBASE}/include/rapidcheck/gtest.h:devel/rapidcheck \
 		nlohmann-json>=3.9.1_2:devel/nlohmann-json
 LIB_DEPENDS=	libaws-cpp-sdk-core.so:devel/aws-sdk-cpp \
+		libaws-crt-cpp.so:devel/aws-crt-cpp \
 		libboost_context.so:devel/boost-libs \
 		libbrotlienc.so:archivers/brotli \
+		libcpuid.so:sysutils/libcpuid \
 		libcurl.so:ftp/curl \
 		libeditline.so:devel/editline \
 		libgc.so:devel/boehm-gc \
+		liblowdown.so:textproc/lowdown \
 		libsodium.so:security/libsodium
 TEST_DEPENDS=	dot:graphics/graphviz \
 		git:devel/git \
 		gxargs:misc/findutils \
 		hg:devel/mercurial
 
-USES=		autoreconf bison compiler:c++17-lang gmake localbase pkgconfig \
+USES=		autoreconf bison compiler:c++20-lang gmake localbase pkgconfig \
 		sqlite:3 ssl
 USE_GITHUB=	yes
 GH_ACCOUNT=	NixOS
-GH_TAGNAME=	7d81582
+GH_TAGNAME=	8405070
 USE_LDCONFIG=	yes
 
 HAS_CONFIGURE=		yes
@@ -103,10 +106,10 @@ pre-test:
 	${MKDIR} /tmp/nix-test
 
 	${REINPLACE_CMD} -e 's| xargs | gxargs |g' ${WRKSRC}/tests/push-to-store.sh
-	${REINPLACE_CMD} -e 's| touch | /usr/bin/touch |g' ${WRKSRC}/tests/timeout.nix
-	${REINPLACE_CMD} -e 's| touch | /usr/bin/touch |g' ${WRKSRC}/tests/check-reqs.nix
-	${REINPLACE_CMD} -e 's| touch | /usr/bin/touch |g' ${WRKSRC}/tests/nar-access.nix
-	${REINPLACE_CMD} -e 's| touch | /usr/bin/touch |g' ${WRKSRC}/tests/pass-as-file.sh
+	${REINPLACE_CMD} -e 's| touch | ${TOUCH} |g' ${WRKSRC}/tests/timeout.nix
+	${REINPLACE_CMD} -e 's| touch | ${TOUCH} |g' ${WRKSRC}/tests/check-reqs.nix
+	${REINPLACE_CMD} -e 's| touch | ${TOUCH} |g' ${WRKSRC}/tests/nar-access.nix
+	${REINPLACE_CMD} -e 's| touch | ${TOUCH} |g' ${WRKSRC}/tests/pass-as-file.sh
 	${REINPLACE_CMD} -e 's| date | ${LOCALBASE}/bin/gdate |g' ${WRKSRC}/tests/check.nix
 
 	${REINPLACE_CMD} -e 's| wc -l)| /usr/bin/grep -c .)|g' ${WRKSRC}/tests/gc-auto.sh
