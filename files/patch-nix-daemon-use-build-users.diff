@@ -1,0 +1,11 @@
+--- src/libstore/lock.cc	2023-07-23 14:42:42
++++ src/libstore/lock.cc	2023-07-23 14:42:32
+@@ -191,7 +191,7 @@
+     #if __linux__
+     static bool b = (settings.buildUsersGroup != "" || settings.autoAllocateUids) && getuid() == 0;
+     return b;
+-    #elif __APPLE__
++    #elif __APPLE__ || __FreeBSD__
+     static bool b = settings.buildUsersGroup != "" && getuid() == 0;
+     return b;
+     #else

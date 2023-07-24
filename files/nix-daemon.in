@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# PROVIDE: nix_daemon
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf to enable nix-daemon:
+#
+# nix_daemon_enable="YES"
+#
+
+. /etc/rc.subr
+
+name="nix_daemon"
+rcvar=nix_daemon_enable
+
+command=%%PREFIX%%/bin/nix-daemon
+
+nix_daemon_flags="--daemon"
+
+load_rc_config ${name}
+run_rc_command "$1"

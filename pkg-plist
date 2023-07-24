@@ -10,6 +10,7 @@ bin/nix-instantiate
 bin/nix-prefetch-url
 bin/nix-shell
 bin/nix-store
+etc/rc.d/nix-daemon
 etc/profile.d/nix-daemon.fish
 etc/profile.d/nix-daemon.sh
 etc/profile.d/nix.fish

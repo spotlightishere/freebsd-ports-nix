@@ -43,12 +43,14 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	NixOS
 GH_TAGNAME=	8405070
 USE_LDCONFIG=	yes
+USE_RC_SUBR=	nix-daemon
 
 HAS_CONFIGURE=		yes
 # Workaround for bashisms in the configure script.
 CONFIGURE_SHELL=	${_BASH}
 CONFIGURE_ARGS=		--disable-seccomp-sandboxing \
-			--enable-gc
+			--enable-gc \
+			--with-system=x86_64-freebsd13
 CONFIGURE_ENV=		OPENSSL_CFLAGS="-I ${OPENSSLINC}" \
 			OPENSSL_LIBS="-L ${OPENSSLLIB}"
 # Workaround for:
