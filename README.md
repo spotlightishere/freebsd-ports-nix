@@ -1,31 +1,9 @@
-freebsd-ports-nix
-=================
+# freebsd-ports-nix
 
-[![Build Status](https://api.cirrus-ci.com/github/0mp/freebsd-ports-nix.svg)](https://cirrus-ci.com/github/0mp/freebsd-ports-nix)
+Experimental fork of the basis of `sysutils/nix`, [freebsd-ports-nix](https://github.com/0mp/freebsd-ports-nix).
+There is no bootstrap stage for FreeBSD at the moment, but Nix itself builds. Sort of.
 
-Nix package manager port for the FreeBSD Ports Collection.
-
-Installation
-------------
-
-The port has already been committed to the FreeBSD Ports Collection (see [sysutils/nix on FreshPorts](https://www.freshports.org/sysutils/nix/)).
-
-The binary package can be installed with `pkg install nix`.
-
-Community
----------
-
-Join us on https://libera.chat, channel `#freebsd-nix`.
-
-References
-----------
-
-### Blog posts mentioning Nix on FreeBSD
-
--	http://sandervanderburg.blogspot.com/2020/02/a-declarative-process-manager-agnostic.html
-
-### Interesting issues, pull requests, and other related efforts
-
--	https://github.com/NixOS/nixpkgs/pull/81459
--	WIP port of Nix to pkgsrc: https://wip.pkgsrc.org/cgi-bin/gitweb.cgi?p=pkgsrc-wip.git;a=tree;f=nix;hb=HEAD
-- https://github.com/NixOS/nixpkgs/pull/82131
+## Usage
+1. Install this port's dependencies: `pkg install -y < ./dependencies.txt`
+2. Manually install `$RAPIDCHECK_SOURCE/extras/gtest/include/rapidcheck/gtest.h` into `/usr/local/include/rapidcheck/` by copying from its source. (This header not being included should be reported upstream... with due time, hopefully.)
+3. `sudo make install`

@@ -1,0 +1,12 @@
+--- src/libstore/s3-binary-cache-store-orig.cc	2024-01-03 22:02:11
++++ src/libstore/s3-binary-cache-store.cc	2024-01-03 21:59:16
+@@ -8,8 +8,8 @@
+ #include "compression.hh"
+ #include "filetransfer.hh"
+ 
+-#include <aws/core/Aws.h>
+ #include <aws/core/VersionConfig.h>
++#include <aws/core/Aws.h>
+ #include <aws/core/auth/AWSCredentialsProvider.h>
+ #include <aws/core/auth/AWSCredentialsProviderChain.h>
+ #include <aws/core/client/ClientConfiguration.h>

@@ -2,7 +2,7 @@
 # $FreeBSD: head/sysutils/nix/Makefile 550026 2020-09-25 12:54:38Z 0mp $
 
 PORTNAME=	nix
-DISTVERSION=	2.16.1
+DISTVERSION=	2.19.2
 CATEGORIES=	sysutils
 
 MAINTAINER=	0mp@FreeBSD.org
@@ -13,6 +13,7 @@ LICENSE_FILE=	${WRKSRC}/COPYING
 
 BUILD_DEPENDS=	${LOCALBASE}/share/aclocal/ax_cxx_compile_stdcxx.m4:devel/autoconf-archive \
 		bash:shells/bash \
+		gsed:textproc/gsed \
 		mdbook:textproc/mdbook \
 		mdbook-linkcheck:textproc/mdbook-linkcheck \
 		gnustat:sysutils/coreutils \
@@ -26,7 +27,6 @@ LIB_DEPENDS=	libaws-cpp-sdk-core.so:devel/aws-sdk-cpp \
 		libaws-crt-cpp.so:devel/aws-crt-cpp \
 		libboost_context.so:devel/boost-libs \
 		libbrotlienc.so:archivers/brotli \
-		libcpuid.so:sysutils/libcpuid \
 		libcurl.so:ftp/curl \
 		libeditline.so:devel/editline \
 		libgc.so:devel/boehm-gc \
@@ -41,7 +41,7 @@ USES=		autoreconf bison compiler:c++20-lang gmake localbase pkgconfig \
 		sqlite:3 ssl
 USE_GITHUB=	yes
 GH_ACCOUNT=	NixOS
-GH_TAGNAME=	8405070
+GH_TAGNAME=	50f8f1c
 USE_LDCONFIG=	yes
 USE_RC_SUBR=	nix-daemon
 
@@ -62,7 +62,7 @@ TEST_ARGS=		nix_tests="${_PASSING_TESTS}"
 TEST_TARGET=		installcheck
 
 # grealpath and gnustat are needed for tests.
-BINARY_ALIAS=	realpath=grealpath stat=gnustat
+BINARY_ALIAS=	realpath=grealpath stat=gnustat sed=gsed
 
 SUB_FILES=	pkg-message
 
