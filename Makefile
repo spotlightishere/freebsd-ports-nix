@@ -50,7 +50,7 @@ HAS_CONFIGURE=		yes
 CONFIGURE_SHELL=	${_BASH}
 CONFIGURE_ARGS=		--disable-seccomp-sandboxing \
 			--enable-gc \
-			--with-system=x86_64-freebsd13
+			--with-system=x86_64-freebsd14
 CONFIGURE_ENV=		OPENSSL_CFLAGS="-I ${OPENSSLINC}" \
 			OPENSSL_LIBS="-L ${OPENSSLLIB}"
 # Workaround for:
